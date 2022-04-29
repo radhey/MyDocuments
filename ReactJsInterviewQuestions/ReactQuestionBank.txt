@@ -1,0 +1,38 @@
+1st round:
+1. Basic JS and React questions
+2. Flatten a multidimensional array without using inbuilt function
+3. Convert class based life cycle methods to functional life cycle hooks.
+
+2nd round:
+1. Multiple questions on this object like what is this, they asked me find the value of this on from the JS snippets.
+2. Merge a two sorted arrays
+3. Filter based on the id and sum the no of quantities from the array of objects
+4. Create basic timer component using functional component
+5. Then typical react interview questions.
+
+
+Frontend developer/React:
+
+Local storage/session storage/cookies and its related questions
+SetTimeout code snippets
+Event loop concept/microtask queue
+object cloning/Object.assign()
+promises
+simple program with Array.reduce function
+Prototypal inheritance
+Object,create() and its related questions
+Arrow functions with 'this' keyword
+
+React:
+Reconcilliation
+Context api
+virtual dom
+keys in react
+Coding - URL will be given.. Create a component and get the results from url and show it in the component
+
+
+Critical Rendering Path.
+Clojures.
+Prototypes.
+Document Flow.
+TDZ

@@ -1,0 +1,10 @@
+1. Build component using React Hooks.
+2. Follow all the coding standards.
+
+Use case:-
+Create a Form to select a city and submit the request.
+
+Fetch the students list response from API for chosen city (Create a Request object.
+Mock the API URL and Response).
+
+Process the response and render the student information in a table. Display Student first name and last name, School Name in that order.
