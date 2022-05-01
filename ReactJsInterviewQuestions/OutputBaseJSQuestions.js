@@ -15,6 +15,13 @@ var test = obj.prop.getFullname;
 
 console.log(test());
 
+var arr1 = "john".split("");
+var arr2 = arr1.reverse();
+var arr3 = "jones".split("");
+arr2.push(arr3);
+console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1)); //output: array 1: length=5 last=j,o,n,e,s
+console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1)); //output: array 2: length=5 last=j,o,n,e,s
+
 /*output
 Aurelio De Rosa
 
@@ -457,34 +464,35 @@ const people = [
 ];
 
 // returns something like below:
-/*{
-  "indigo": [{ "name": "Elroy", "color": "indigo", "age": 36 }, ...,],
-  "orchid": [{...}, ...],
-  ...
-}*/
+/*
+{
+  "indigo": [
+    { "name": "Elroy", "color": "indigo", "age": 36 },
+    { "name": "Malachi", "color": "indigo", "age": 36 },
+    { "name": "Jarrett", "color": "indigo", "age": 53 }
+  ],
+  "orchid": [
+    { "name": "Kaitlin", "color": "orchid", "age": 70 },
+    { "name": "Alayna", "color": "orchid", "age": 40 },
+    { "name": "Jannie", "color": "orchid", "age": 60 },
+    { "name": "Bell", "color": "orchid", "age": 46 }
+  ],
+  "silver": [
+    { "name": "Federico", "color": "silver", "age": 35 },
+    { "name": "Kavon", "color": "silver", "age": 64 },
+    { "name": "Braeden", "color": "silver", "age": 63 }
+  ],
+  "orange": [{ "name": "k'Nox", "color": "orange", "age": 68 }]
+}
 
-const bucketByField = (people, field) => {
-  const result = {};
-  people.forEach((item) => {
-    // can we figure out where this item goes in result?
-    if (result[item[field]]) {
-      // add new item on end
-      result[item[field]].push(item);
-    } else {
-      // create bucket
-      result[item[field]] = [item];
-    }
-  });
-  return result;
-};
-// example usage:
-const result = bucketByField(people, "color");
-
-console.log(result); // some array
-//console.log(result.orchid);			// another array
-
-const result2 = bucketByField(people, "age");
-console.log(result2["36"]); // array of people who are 36
+*/
+const gp = people.reduce((groups, item) => {
+  const groupArr = groups[item.color] || [];
+  groupArr.push(item);
+  groups[item.color] = groupArr;
+  return groups;
+}, {});
+console.log(gp);
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -553,91 +561,7 @@ const covidFreeState = states.filter((state) => {
 
 console.log(covidFreeState);
 
-const states = [
-  {
-    name: "goa",
-    Population: 1000,
-  },
-  {
-    name: "maharashtra",
-    population: 100000,
-  },
-  {
-    name: "Kerala",
-    Population: 1000,
-  },
-  {
-    name: "Delhi",
-    population: 100000,
-  },
-  {
-    name: "Kolkata",
-    Population: 1000,
-  },
-  {
-    name: "UP",
-    population: 100000,
-  },
-  {
-    name: "Sikkim",
-    Population: 1000,
-  },
-  {
-    name: "Ladakh",
-    population: 100000,
-  },
-];
-const covidstates = [
-  {
-    name: "Kolkata",
-    patients: 20,
-  },
-  {
-    name: "UP",
-    patients: 100,
-  },
-  {
-    name: "Sikkim",
-    patients: 10,
-  },
-  {
-    name: "Ladakh",
-    patients: 10,
-  },
-];
-
-const covidDataStates = covidstates.map((state) => {
-  return state.name;
-});
-
-console.log(covidDataStates);
-
-console.log(covidDataStates.indexOf("Kolkata"));
-
-const nonCovidStates = states.filter((state) => {
-  return covidDataStates.indexOf(state.name) < 0;
-});
-
-console.log(nonCovidStates);
-//other option
-
-var filterstates = states.filter(
-  (state) => covidstates.filter((x) => x.name == state.name).length == 0
-);
-console.log(filterstates);
-
-const filteredStates = states.filter(
-  (state) =>
-    covidstates.findIndex((covidstate) => covidstate.name === state.name) === -1
-);
 //////////////////////
-const set = new Set(covidstates.map(({ name }) => name));
-const result = [];
-for (const obj of states) {
-  if (!set.has(obj.name)) {
-    result.push(obj);
-  }
-}
 
 const myRecord = (states, covidstates) => {
   let output = [];
@@ -797,6 +721,14 @@ var deskTypes = desks.reduce(
   { sitting: 0, standing: 0 }
 );
 console.log(deskTypes);
+
+//[2,3,2,3,4,1,5,1] each number how many times got repeated
+var a = [1, 2, 3, 1, 2, 3, 4];
+var map = a.reduce(function (obj, b) {
+  obj[b] = ++obj[b] || 1;
+  return obj;
+}, {});
+console.log(map);
 
 //Question
 //Another really hard one! Write a function called 'unique' that will remove all the duplicate values from an array.
