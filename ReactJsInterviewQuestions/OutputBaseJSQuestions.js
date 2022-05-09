@@ -9,11 +9,10 @@ var obj = {
   },
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); //Aurelio De Rosa
 
 var test = obj.prop.getFullname;
-
-console.log(test());
+console.log(test()); //undefined
 
 var arr1 = "john".split("");
 var arr2 = arr1.reverse();
@@ -45,6 +44,7 @@ console.log("a defined? " + (typeof a !== "undefined"));
 console.log("b defined? " + (typeof b !== "undefined"));
 
 /* output
+3
 a defined? false
 b defined? true
 */
@@ -107,6 +107,19 @@ console.log(evenNumbers);
 
 const sum = (a) => (b) => b ? sum(a + b) : a;
 console(sum(2)(3)());
+
+//nth number of sum
+function add(...args) {
+  if (args.length === 0) return 0;
+  let sum = args.reduce((a, b) => a + b, 0);
+  return (...args) => (args.length ? add(sum, ...args) : sum);
+}
+
+console.log(add()); // 0
+console.log(add(1, 2, 3)()); // 6
+console.log(add(1, 2, 3)(4, 5)()); // 15
+console.log(add(1)(4)(6)(7)(9)()); // 27
+
 /*
 genrator function which return a generator object
 */
@@ -406,21 +419,6 @@ function getFrequency(string) {
 }
 getFrequency("Indivisibilities");
 
-//
-function charCount(str) {
-  let map = new Map();
-  for (let i of str) {
-    if (!map.has(i)) {
-      map.set(i, 1);
-    } else {
-      map.set(i, map.get(i) + 1);
-    }
-  }
-
-  for (let [key, value] of map) {
-    console.log(key, value);
-  }
-}
 ///////////////////////////////////
 
 //reverse a string
@@ -1283,3 +1281,53 @@ new Promise((resolve, reject) => {
 })
   .then(console.log)
   .catch(console.error);
+
+//Shallow Copy
+/*
+  Shallow Copy: When a reference variable is copied into a new reference variable using the assignment operator, 
+  a shallow copy of the referenced object is created. In simple words, a reference variable mainly stores the address of 
+  the object it refers to. When a new reference variable is assigned the value of the old reference variable, 
+  the address stored in the old reference variable is copied into the new one. This means both the old and new reference 
+  variable point to the same object in memory. As a result if the state of the object changes through any of the reference 
+  variables it is reflected for both. Let us take an example to understand it better.
+  */
+var employee = {
+  eid: "E102",
+  ename: "Jack",
+  eaddress: "New York",
+  salary: 50000,
+};
+console.log("Employee=> ", employee);
+var newEmployee = employee; // Shallow copy
+console.log("New Employee=> ", newEmployee);
+
+console.log("---------After modification----------");
+newEmployee.ename = "Beck";
+console.log("Employee=> ", employee);
+console.log("New Employee=> ", newEmployee);
+// Name of the employee as well as
+// newEmployee is changed.
+
+//Deep copy
+/*
+Deep Copy: Unlike the shallow copy, deep copy makes a copy of all the members of the old object, allocates separate memory 
+location for the new object and then assigns the copied members to the new object. In this way, both the objects are 
+independent of each other and in case of any modification to either one the other is not affected. Also, if one of 
+the objects is deleted the other still remains in the memory. Now to create a deep copy of an object in JavaScript 
+we use JSON.parse() and JSON.stringify() methods. Let us take an example to understand it better.
+*/
+var employee = {
+  eid: "E102",
+  ename: "Jack",
+  eaddress: "New York",
+  salary: 50000,
+};
+console.log("=========Deep Copy========");
+var newEmployee = JSON.parse(JSON.stringify(employee));
+console.log("Employee=> ", employee);
+console.log("New Employee=> ", newEmployee);
+console.log("---------After modification---------");
+newEmployee.ename = "Beck";
+newEmployee.salary = 70000;
+console.log("Employee=> ", employee);
+console.log("New Employee=> ", newEmployee);
