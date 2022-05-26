@@ -1,3 +1,11 @@
+//Get calculated days difference from given two dates
+const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+const firstDate = new Date(2008, 1, 12);
+const secondDate = new Date(2008, 1, 22);
+
+const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+console.log(diffDays);
+
 var fullname = "John Doe";
 var obj = {
   fullname: "Colin Ihrig",
@@ -421,6 +429,14 @@ getFrequency("Indivisibilities");
 
 ///////////////////////////////////
 
+//[2,3,2,3,4,1,5,1] each number how many times got repeated
+var a = [1, 2, 3, 1, 2, 3, 4];
+var map = a.reduce(function (obj, b) {
+  obj[b] = ++obj[b] || 1;
+  return obj;
+}, {});
+console.log(map);
+
 //reverse a string
 // program to reverse a string
 
@@ -719,14 +735,6 @@ var deskTypes = desks.reduce(
   { sitting: 0, standing: 0 }
 );
 console.log(deskTypes);
-
-//[2,3,2,3,4,1,5,1] each number how many times got repeated
-var a = [1, 2, 3, 1, 2, 3, 4];
-var map = a.reduce(function (obj, b) {
-  obj[b] = ++obj[b] || 1;
-  return obj;
-}, {});
-console.log(map);
 
 //Question
 //Another really hard one! Write a function called 'unique' that will remove all the duplicate values from an array.
@@ -1064,6 +1072,16 @@ var lengthOfLongestSubstring = function (s) {
 
   return longestStringLength;
 };
+
+//Flatten array in javascript
+const flatme = [1, [2, [3, 4, [5]]]];
+const flatten = (arr) => {
+  return arr.reduce((acc, cur) => {
+    return Array.isArray(cur) ? acc.concat(flatten(cur)) : acc.concat(cur);
+  }, []);
+};
+
+console.log(flatten(flatme)); //output [1, 2, 3, 4, 5]
 
 //How to Flatten JavaScript Object of Unknown Hierarchy
 const obj = {
